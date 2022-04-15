@@ -22,7 +22,8 @@ public class AppTest {
         this.Driver = new ChromeDriver();
         this.Driver = new FirefoxDriver();
         Driver.manage().window().maximize();
-        Driver.get("https://www.google.com");
+//        Driver.get("https://www.google.com");
+        Driver.navigate().to("https://24h.com.vn");
 
     }
 
