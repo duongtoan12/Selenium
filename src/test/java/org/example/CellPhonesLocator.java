@@ -91,6 +91,12 @@ public class CellPhonesLocator {
         lzUsername.sendKeys("Khanh.tx@live.com");
 
          */
+//        this.driver.get("https://theparallel.io/");
+//        WebElement TbStaking = this.driver.findElement(By.cssSelector("input.text-5 text-shadow-2 text-yellow "));
+//        TbStaking.sendKeys("100");
+//        this.driver.findElement(By.cssSelector("submit.sc-iqcoie kzjoBF square")).click();
+
+
     }
 
     @Test
