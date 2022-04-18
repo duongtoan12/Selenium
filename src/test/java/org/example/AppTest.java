@@ -2,6 +2,7 @@ package org.example;
 
 import static org.junit.Assert.assertTrue;
 
+import com.google.common.primitives.Booleans;
 import org.junit.*;
 
 import org.junit.Test;
@@ -17,8 +18,8 @@ public class AppTest {
 
     @Before
     public void beforeTest() {
-        System.setProperty("webdriver.gecko.driver", "D:\\Tài liệu automation testing\\geckodriver-v0.31.0-win64\\geckodriver.exe");
-        System.setProperty("webdriver.chrome.driver", "D:\\Tài liệu automation testing\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.gecko.driver", "D:\\tài liệu automation testing\\Driver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\tài liệu automation testing\\Driver\\chromedriver_win32\\chromedriver.exe");
         this.Driver = new ChromeDriver();
         this.Driver = new FirefoxDriver();
         Driver.manage().window().maximize();
@@ -30,7 +31,7 @@ public class AppTest {
     @After
     public void AfterTest (){
         this.Driver.quit();
-//        this.Driver.close();
+        this.Driver.close();
     }
 
     @Test
@@ -43,13 +44,11 @@ public class AppTest {
 
     }
 
-//    @Test
-//    public void verifyURL(){
-//        String URL = Driver.getCurrentUrl();
-//        String ExpectedURL ="https://www.google.com/";
-//        Assert.assertTrue(ExpectedURL, this.URL);
-//
-//    }
+    @Test
+    public void verifyURL(){
+        String ExpectedURL = Driver.getCurrentUrl();
+        Assert.assertTrue(ExpectedURL.startsWith("https://google.com"));
+    }
 
     @Test
     public void GetSourceCode(){
@@ -57,6 +56,16 @@ public class AppTest {
         int PageSourcelength =PageSource.length();
         System.out.println("page source code là " + PageSource);
         System.out.println("length page source code là " + PageSourcelength);
+    }
+
+
+    @Test
+    public void windowncommand(){
+        this.Driver.manage().window().maximize();
+        this.Driver.manage().window().minimize();
+        this.Driver.manage().window().fullscreen();
+        this.Driver.manage().window().getSize();
+
     }
 
 
