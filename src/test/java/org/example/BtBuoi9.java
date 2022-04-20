@@ -28,13 +28,12 @@ public class BtBuoi9 {
     @Test
     public void BT1(){
         this.Driver.get("https://fado.vn/dang-nhap?redirect=https%3A%2F%2Ffado.vn%2F");
-
         WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));
         TbEmail.sendKeys("");
         WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
         TbPass.sendKeys("");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]"));
-        
+
     }
 
 
