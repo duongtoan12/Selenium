@@ -1,7 +1,9 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Bai2 {
 
@@ -25,13 +28,35 @@ public class Bai2 {
 
     @After
     public void AfterTest() throws InterruptedException{
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         this.Driver.quit();
     }
 
     @Test
     public void CheckvalidTime(){
-        WebElement tbbutton =this.Driver.findElement(By.cssSelector("#cc-main-conversion-block > div > div.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2 > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-align-items-xs-center.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6 > div.react-datepicker-wrapper.cc37 > div > div > div.MuiInputAdornment-root.MuiInputAdornment-positionStart > button > span.MuiIconButton-label > svg"));
+        String pattern = "dd MMMMM yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("da", "DK"));
+        String date = simpleDateFormat.format(new Date());
+//        String CheckDate = this.Driver.findElement(By.cssSelector("input[class^=MuiInputBase-input]")).getText();
+        String CheckDate= this.Driver.findElement(By.xpath("// input[@value=\"21 April 2022\"]")).getAttribute("value").toLowerCase(Locale.ROOT);
+        Assert.assertEquals(date,CheckDate);
+
+
+        WebElement we = Driver.findElement(By.cssSelector("svg.MuiSvgIcon-root"));
+        boolean actualValue = we.isEnabled();
+
+        if (date==CheckDate) {
+            Assert.assertTrue(!actualValue);
+
+
+
+
+
+
+
+        }
+
     }
+
 
 }
