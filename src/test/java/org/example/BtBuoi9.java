@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
 
+import java.time.Duration;
+
 public class BtBuoi9 {
     WebDriver Driver;
     @Before
@@ -19,6 +21,8 @@ public class BtBuoi9 {
         this.Driver =new ChromeDriver();
         this.Driver.manage().window().maximize();
         this.Driver.get("https://fado.vn/dang-nhap?redirect=https%3A%2F%2Ffado.vn%2F");
+        this.Driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
     }
 
     @After
@@ -29,19 +33,34 @@ public class BtBuoi9 {
     }
 
     @Test
-    public void CheckNull()// Check null
+    public void CheckBlank()// Check null
 
     {
-        WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));
-        TbEmail.sendKeys("");
-        WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
-        TbPass.sendKeys("");
-        this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        String Null = this.Driver.findElement(By.id("auth-block__form-group__email-error")).getText();
-        String rgbFormat =this.Driver.findElement(By.id("auth-block__form-group__email-error")).getCssValue("color");
-        String hexcolor = Color.fromString(rgbFormat).asHex();
-        Assert.assertEquals("Vui lòng nhập dữ liệu", Null);
-        Assert.assertEquals("#cc353b",hexcolor);
+        WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));// find textbox email
+        WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]")); /// find textbox pass
+        TbEmail.clear();
+        TbPass.clear();
+        this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();// click button
+        String Blank = this.Driver.findElement(By.id("auth-block__form-group__email-error")).getText();// get thông báo
+
+        //Get mã màu thông báo
+        String rgbFormatThongBao =this.Driver.findElement(By.id("auth-block__form-group__email-error")).getCssValue("color");
+        String hexcolorThongBao = Color.fromString(rgbFormatThongBao).asHex();
+
+        //Get mã màu border
+        String rgbFormatborderInput = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email.my-form-control")).getCssValue("border-color");
+        String hexcolorborderInput = Color.fromString(rgbFormatborderInput).asHex();
+        // Check mã màu thông báo lỗi
+        Assert.assertEquals("#cc353b",hexcolorThongBao);
+
+        // Check mã màu border
+        Assert.assertEquals("#cc353b",hexcolorborderInput);
+
+        // Check data
+        Assert.assertEquals("Vui lòng nhập dữ liệu", Blank);
+
+
+        
 //
     }
 
@@ -50,14 +69,13 @@ public class BtBuoi9 {
     @Test
     public void CheckInvalidEmail() throws InterruptedException {
         WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));
-        TbEmail.sendKeys("duongdinhtoan@gmail.com");
         WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
+        TbEmail.sendKeys("duongdinhtoan@gmail.com");
         TbPass.sendKeys("Abc123");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
         Thread.sleep(5000);
         String InvalidEmail = this.Driver.findElement(By.xpath("//*[@id=\"auth-block__login-form\"]/div[1]/br[2]")).getText();
-        System.out.println(InvalidEmail);
-//        Assert.assertEquals("- Tài khoản không tồn tại, vui lòng kiểm tra lại", InvalidEmail);
+        InvalidEmail.split("- " );
     }
 
     @Test
@@ -68,8 +86,9 @@ public class BtBuoi9 {
         TbPass.sendKeys("Abc12");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
         Thread.sleep(5000);
-        String TbInvalidPass = this.Driver.findElement(By.cssSelector("div.my-alert")).getText();
-        Assert.assertEquals("- Mật khẩu không đúng, vui lòng kiểm tra lại", TbInvalidPass);
+        WebElement TbInvalidPass = this.Driver.findElement(By.cssSelector("div.my-alert"));
+
+
     }
 
     @Test
