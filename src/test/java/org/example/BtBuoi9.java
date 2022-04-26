@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -67,26 +69,30 @@ public class BtBuoi9 {
 
 
     @Test
-    public void CheckInvalidEmail() throws InterruptedException {
+    public void CheckInvalidEmail()  {
         WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));
         WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
         TbEmail.sendKeys("duongdinhtoan@gmail.com");
         TbPass.sendKeys("Abc123");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        Thread.sleep(5000);
-        String InvalidEmail = this.Driver.findElement(By.xpath("//*[@id=\"auth-block__login-form\"]/div[1]/br[2]")).getText();
-        InvalidEmail.split("- " );
+        WebElement InvalidEmail = this.Driver.findElement(By.xpath("//*[@id=\"auth-block__login-form\"]/div[1]/br[2]"));
+        String StrError = "-" + InvalidEmail.getText().split("-")[1];
+        Assert.assertEquals("- Tài khoản không tồn tại, vui lòng kiểm tra lại", StrError);
     }
 
     @Test
-    public void CheckInvalidPass() throws InterruptedException {
+    public void CheckInvalidPass(){
         WebElement TbEmail = this.Driver.findElement(By.cssSelector("input#auth-block__form-group__email"));
         TbEmail.sendKeys("duongdinhtoan0310@gmail.com");
         WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
         TbPass.sendKeys("Abc12");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        Thread.sleep(5000);
         WebElement TbInvalidPass = this.Driver.findElement(By.cssSelector("div.my-alert"));
+
+        String StrInvalidPass = "-" + TbInvalidPass.getText().split("-")[1];
+        Assert.assertEquals("- Tài khoản không tồn tại, vui lòng kiểm tra lại", StrInvalidPass);
+
+
 
 
     }
@@ -98,9 +104,12 @@ public class BtBuoi9 {
         WebElement TbPass = this.Driver.findElement(By.cssSelector("input[type=\"password\"]"));
         TbPass.sendKeys("Abc123");
         this.Driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        Thread.sleep(5000);
-        String LoginSuccess = this.Driver.findElement(By.cssSelector("span.user-name-col")).getText();
-        Assert.assertEquals("Toàn Dương", LoginSuccess);
+        WebDriverWait Waiter = new WebDriverWait(this.Driver,Duration.ofSeconds(15));// waiter
+        WebElement LbMassage = Waiter.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.user-name-col")));
+        LbMassage.getText();// cho co dieu kien
+//        String LoginSuccess = this.Driver.findElement(By.cssSelector("span.user-name-col")).getText();
+//        Assert.assertEquals("Toàn Dương", LbMassage);
+        System.out.println(LbMassage);
     }
 
 
