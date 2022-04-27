@@ -38,28 +38,35 @@ public class Bai2 {
         //Check Validate
         String pattern = "dd MMMMM yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("da", "DK"));
-        String date = simpleDateFormat.format(new Date());
-        String CheckDate = this.Driver.findElement(By.cssSelector("div.MuiInputBase-root div.MuiInputBase-input")).getAttribute("value").toLowerCase(Locale.ROOT);
-//        Assert.assertEquals(date, CheckDate);
+        String date = simpleDateFormat.format(new Date()); //get date now
+        String CheckDate = this.Driver.findElement(By.cssSelector("div.react-datepicker__input-container div.MuiInputBase-root  input.MuiInputBase-input")).getAttribute("value").toLowerCase(Locale.ROOT); // get date hien thi
+        Assert.assertEquals(date, CheckDate);// verify date
 
-        System.out.println(date);
-        System.out.println(CheckDate);
 
-        // Check Status button
-        boolean Status = Driver.findElement(By.xpath("//*[@id=\"cc-main-conversion-block\"]/div/div[3]/div[1]/div[2]/div/div/div[2]/button[1]")).isEnabled();
+
+
+//         Check Status button
+        WebElement StatusButton =Driver.findElement(By.cssSelector("div.MuiInputAdornment-positionEnd button[class*=\"cc33\"]"));
+        StatusButton.isEnabled();
         if (date == CheckDate) {
-            Assert.assertTrue(!Status);
+            Assert.assertEquals(false, StatusButton);
+
+
+
         }
 
 
 
+
+
+
     }
-    @Test
-    public void DatePicker(){
-        this.Driver.findElement(By.xpath("// input[@value=\"21 April 2022\"]")).click();
-        String Expected = Driver.findElement(By.xpath("//*[@id=\"cc-main-conversion-block\"]/div/div[3]/div[1]/div[3]/div/div/div[3]/span[2]")).getText();
-        Assert.assertEquals("April 21, 2022", Expected);
-    }
+//    @Test
+//    public void DatePicker(){
+//        this.Driver.findElement(By.xpath("// input[@value=\"21 April 2022\"]")).click();
+//        String Expected = Driver.findElement(By.xpath("//*[@id=\"cc-main-conversion-block\"]/div/div[3]/div[1]/div[3]/div/div/div[3]/span[2]")).getText();
+//        Assert.assertEquals("April 21, 2022", Expected);
+//    }
 
 }
 
