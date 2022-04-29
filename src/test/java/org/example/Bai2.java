@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.SimpleDateFormat;
@@ -56,30 +57,28 @@ public class Bai2 {
         boolean StatusButtonNextOldDate =Driver.findElement(By.cssSelector("div.MuiInputAdornment-positionEnd button[class*=\"cc33\"]")).isEnabled();//Check Status buttonNextolddate
 
         this.Driver.findElement(By.cssSelector("div.react-datepicker__input-container  div.MuiOutlinedInput-adornedEnd")).click();
-        WebElement CheckDatePicker =Driver.findElement(By.cssSelector("div.react-datepicker-popper"));
-        CheckDatePicker.isDisplayed();
-        System.out.println(CheckDatePicker);
+//        WebDriverWait wait = new WebDriverWait(Driver, 10);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.react-datepicker-poppe")));
+        WebElement DatePicker =Driver.findElement(By.cssSelector("div.react-datepicker-popper"));
+        boolean CheckDatePicker =DatePicker.isDisplayed();
 
 
         Assert.assertEquals(date, CheckDate);// verify date
         Assert.assertTrue(!StatusButtonNextRealDate);//Check Status buttonNextrealdate
         Assert.assertTrue(StatusButtonNextOldDate);//Check Status buttonNextolddate
-//        Assert.assertEquals(true, CheckDatePicker);
-
-
-
-
-
+        Assert.assertEquals(true, CheckDatePicker); //Check Date Picker
 
 
 
     }
-//    @Test
-//    public void DatePicker(){
-//        this.Driver.findElement(By.xpath("// input[@value=\"21 April 2022\"]")).click();
-//        String Expected = Driver.findElement(By.xpath("//*[@id=\"cc-main-conversion-block\"]/div/div[3]/div[1]/div[3]/div/div/div[3]/span[2]")).getText();
-//        Assert.assertEquals("April 21, 2022", Expected);
-//    }
+    @Test
+    public void DatePicker(){
+        this.Driver.findElement(By.cssSelector("div.react-datepicker__input-container div.MuiOutlinedInput-adornedEnd")).click();
+        WebElement ClickButton = Driver.findElement(By.cssSelector("div.react-datepicker__month-container div.react-datepicker__day--004]"));
+        ClickButton.click();
+        String Actual = Driver.findElement(By.xpath("div.react-datepicker__input-container div.MuiOutlinedInput-adornedEnd")).getText();
+        Assert.assertEquals("04 April 2022", Actual);
+    }
 
 }
 
