@@ -80,6 +80,13 @@ public class Bai2 {
         Assert.assertEquals("04 April 2022", Actual);
     }
 
+    @Test
+    public void CheckSourceCurrency(){
+//        WebElement Currency =Driver.findElement(By.cssSelector(" div.MuiOutlinedInput-adornedEnd div.cc14 span.flag-eu"));
+        String PageSourceCode =Driver.getPageSource();
+        System.out.println(PageSourceCode);
+    }
+
 }
 
 
