@@ -73,18 +73,23 @@ public class Bai2 {
     }
     @Test
     public void DatePicker(){
-        this.Driver.findElement(By.cssSelector("div.react-datepicker__input-container div.MuiOutlinedInput-adornedEnd")).click();
-        WebElement ClickButton = Driver.findElement(By.cssSelector("div.react-datepicker__month-container div.react-datepicker__day--004]"));
-        ClickButton.click();
+        WebElement OpenDatePicker =Driver.findElement(By.cssSelector("div.MuiInputAdornment-positionEnd button.cc34"));
+        OpenDatePicker.click();;
+        WebElement ChooseDay = Driver.findElement(By.cssSelector("div.react-datepicker__month-container div[aria-label*=\"May 4th\"]"));
+        ChooseDay.click();
         String Actual = Driver.findElement(By.xpath("div.react-datepicker__input-container div.MuiOutlinedInput-adornedEnd")).getText();
-        Assert.assertEquals("04 April 2022", Actual);
+        Assert.assertEquals("04 May 2022", Actual);
+
     }
 
     @Test
-    public void CheckSourceCurrency(){
-//        WebElement Currency =Driver.findElement(By.cssSelector(" div.MuiOutlinedInput-adornedEnd div.cc14 span.flag-eu"));
-        String PageSourceCode =Driver.getPageSource();
-        System.out.println(PageSourceCode);
+    public void CheckPickerCurrency(){
+        WebElement Currency =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] button.MuiAutocomplete-popupIndicator"));Currency.click();
+       WebElement ClickCurrency =Driver.findElement(By.cssSelector("li#baseCurrency_currency_autocomplete-option-1 div.cc8"));
+       ClickCurrency.click();
+       String CheckHienThi =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] div.cc5")).getText();
+       Assert.assertEquals("GBP", CheckHienThi);
+
     }
 
 }
