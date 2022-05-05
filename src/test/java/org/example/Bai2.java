@@ -3,6 +3,7 @@ package org.example;
 import com.beust.ah.A;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -93,21 +94,20 @@ public class Bai2 {
 
     }
 
-//    @Test
-//    public void DesstinationCurrency(){
-//        WebElement Currency =Driver.findElement(By.cssSelector("div[class=\"MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon\"]  button.MuiAutocomplete-popupIndicator"));
-        
+    @Test
+    public void DesstinationCurrency(){
+        WebElement Currency =Driver.findElement(By.cssSelector("div[class=\"MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon\"]  button.MuiAutocomplete-popupIndicator"));
 
-        /*Currency.click();
-        WebElement ClickCurrency =Driver.findElement(By.cssSelector("li#baseCurrency_currency_autocomplete-option-1 div.cc8"));
+        Currency.click();
+        WebElement ClickCurrency =Driver.findElement(By.cssSelector("li#quoteCurrency_currency_autocomplete-option-3"));
         ClickCurrency.click();
-        String CheckHienThi =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] div.cc5")).getText();
-        Assert.assertEquals("GBP", CheckHienThi);
+        String CheckHienThi =Driver.findElement(By.cssSelector("div[class=\"MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon\"] div.cc14")).getText();
+        Assert.assertEquals("AED", CheckHienThi);
     }
 
 
 
-*/
+
 }
 
 
