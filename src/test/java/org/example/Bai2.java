@@ -73,11 +73,12 @@ public class Bai2 {
     }
     @Test
     public void DatePicker(){
-        WebElement OpenDatePicker =Driver.findElement(By.cssSelector("div.MuiInputAdornment-positionEnd button.cc34"));
+        WebElement OpenDatePicker =Driver.findElement(By.cssSelector("div[class*=\"cc36\"]"));
         OpenDatePicker.click();;
         WebElement ChooseDay = Driver.findElement(By.cssSelector("div.react-datepicker__month-container div[aria-label*=\"May 4th\"]"));
         ChooseDay.click();
-        String Actual = Driver.findElement(By.xpath("div.react-datepicker__input-container div.MuiOutlinedInput-adornedEnd")).getText();
+        String Actual = Driver.findElement(By.cssSelector("div[class*=\"cc36\"] input.MuiOutlinedInput-inputAdornedEnd")).getAttribute("value");
+//        System.out.println(Actual);
         Assert.assertEquals("04 May 2022", Actual);
 
     }
@@ -92,9 +93,9 @@ public class Bai2 {
 
     }
 
-    @Test
-    public void DesstinationCurrency(){
-        WebElement Currency =Driver.findElement(By.cssSelector("div[class=\"MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon\"]  button.MuiAutocomplete-popupIndicator"));
+//    @Test
+//    public void DesstinationCurrency(){
+//        WebElement Currency =Driver.findElement(By.cssSelector("div[class=\"MuiAutocomplete-root MuiAutocomplete-hasClearIcon MuiAutocomplete-hasPopupIcon\"]  button.MuiAutocomplete-popupIndicator"));
         
 
         /*Currency.click();
@@ -106,8 +107,8 @@ public class Bai2 {
 
 
 
+*/
 }
-
 
 
 
