@@ -87,10 +87,10 @@ public class Bai2 {
     @Test
     public void CheckPickerCurrency(){
         WebElement Currency =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] button.MuiAutocomplete-popupIndicator"));Currency.click();
-       WebElement ClickCurrency =Driver.findElement(By.cssSelector("li#baseCurrency_currency_autocomplete-option-1 div.cc8"));
-       ClickCurrency.click();
-       String CheckHienThi =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] div.cc5")).getText();
-       Assert.assertEquals("GBP", CheckHienThi);
+        WebElement ClickCurrency =Driver.findElement(By.cssSelector("li#baseCurrency_currency_autocomplete-option-1 div.cc8"));
+        ClickCurrency.click();
+        String CheckHienThi =Driver.findElement(By.cssSelector("div[class*=\"cc13\"] div.cc5")).getText();
+        Assert.assertEquals("GBP", CheckHienThi);
 
     }
 
